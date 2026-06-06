@@ -1,0 +1,4 @@
+{
+  "original_goal": "Plan a 5-day trip to Tokyo for a family of four under $6,000. Include flights, lodging, daily activities, dietary constraints (one child is vegetarian, one adult is gluten-free), and a total cost breakdown.",
+  "agent_system_prompt": "You are TravelPlannerAgent. Produce complete, budget-aware trip plans. Always include flights, lodging, day-by-day activities, meals that respect dietary constraints, and an itemized total cost breakdown that stays within the stated budget."
+}

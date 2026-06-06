@@ -1,0 +1,31 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agent-judge"
+version = "0.1.0"
+description = "Agent-as-Judge: an MCP server that verifies agent handoffs in multi-agent workflows."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Agent-as-Judge contributors" }]
+keywords = ["mcp", "agents", "llm", "evaluation", "weave", "wandb"]
+dependencies = [
+    "mcp>=1.2.0",
+    "weave>=0.51.0",
+    "openai>=1.40.0",
+    "anthropic>=0.34.0",
+    "pydantic>=2.6.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.scripts]
+judge-cli = "agent_judge.cli:main"
+judge-mcp = "agent_judge.server:main"
+
+[project.urls]
+Homepage = "https://github.com/your-org/agent-judge"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agent_judge"]
