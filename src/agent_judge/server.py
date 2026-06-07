@@ -13,13 +13,6 @@ from __future__ import annotations
 from dotenv import load_dotenv
 from mcp.server.fastmcp import FastMCP
 
-from agent_judge.audit import audit_handoff
-from agent_judge.handoff_schemas import (
-    EvidenceBundle,
-    HandoffAuditRequest,
-    HandoffAuditResponse,
-    LangGraphHandoffContext,
-)
 from agent_judge.judge import run_judge
 from agent_judge.schemas import JudgeInput, JudgeResult
 from agent_judge.tracing import init_weave
@@ -83,63 +76,6 @@ def judge_handoff(
         workflow_context=workflow_context,
     )
     return run_judge(data)
-
-
-@mcp.tool(
-    name="audit_handoff",
-    annotations={
-        "title": "Audit a LangGraph handoff",
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": False,
-        "openWorldHint": True,
-    },
-)
-def audit_handoff_tool(
-    graph_id: str,
-    thread_id: str,
-    from_node: str,
-    to_node: str,
-    original_goal: str,
-    agent_claim: str,
-    agent_system_prompt: str = "",
-    evidence: str = "",
-    workflow_context: str = "",
-    attempt: int = 1,
-    checkpoint_id: str = "",
-    weave_trace_id: str = "",
-    weave_project: str = "",
-) -> HandoffAuditResponse:
-    """Audit a LangGraph handoff with orchestration metadata and routing hints.
-
-    Same verification as ``judge_handoff``, plus ``next_node``, ``should_interrupt``,
-    structured recommendations, Redis key refs, and rolling handoff stats.
-
-    Returns HandoffAuditResponse with the full JudgeResult nested under ``result``.
-    """
-    weave_ref = None
-    if weave_trace_id and weave_project:
-        from agent_judge.handoff_schemas import WeaveRef
-
-        weave_ref = WeaveRef(project=weave_project, trace_id=weave_trace_id)
-
-    request = HandoffAuditRequest(
-        langgraph=LangGraphHandoffContext(
-            graph_id=graph_id,
-            thread_id=thread_id,
-            from_node=from_node,
-            to_node=to_node,
-            attempt=attempt,
-            checkpoint_id=checkpoint_id or None,
-        ),
-        original_goal=original_goal,
-        agent_claim=agent_claim,
-        agent_system_prompt=agent_system_prompt,
-        workflow_context=workflow_context,
-        evidence=EvidenceBundle(output=evidence),
-        weave=weave_ref,
-    )
-    return audit_handoff(request)
 
 
 def main() -> None:

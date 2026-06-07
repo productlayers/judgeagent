@@ -173,55 +173,18 @@ judge-cli --input case.json && ./run-next-step.sh
 ### From Python
 
 ```python
-from agent_judge import run_judge, audit_handoff, JudgeInput, HandoffAuditRequest
-from agent_judge.handoff_schemas import EvidenceBundle, LangGraphHandoffContext
+from agent_judge import run_judge, JudgeInput
 
-# Core judge (any orchestrator)
 result = run_judge(JudgeInput(
     original_goal="Plan a 5-day Tokyo trip for a family of four under $6,000 ...",
     agent_claim="Done. I created a complete itinerary under $6,000.",
     evidence="<the itinerary the agent produced>",
 ))
-
-# LangGraph-aware audit (routing hints + stats + Weave/Redis refs)
-response = audit_handoff(HandoffAuditRequest(
-    langgraph=LangGraphHandoffContext(
-        graph_id="travel_pipeline_v1",
-        thread_id="demo-thread-1",
-        from_node="planner",
-        to_node="booker",
-    ),
-    original_goal="...",
-    agent_claim="Done.",
-    evidence=EvidenceBundle(output="..."),
-))
-if response.result.can_continue:
-    proceed_to(response.next_node)
-elif response.should_interrupt:
-    request_human_review()
+if result.can_continue:
+    proceed()
 else:
-    retry_node(response.next_node)
+    print(result.failure_reasons)
 ```
-
----
-
-## LangGraph orchestration demo
-
-The proposed multi-agent pattern: **Planner → Judge gate → Booker**.
-
-```bash
-pip install -e ".[langgraph]"
-python examples/langgraph_travel_demo.py
-```
-
-Each graph node is a Weave op. The judge gate calls `audit_handoff()` with
-historical evidence from graph state (no agent re-run). On `fail`, the
-orchestrator retries with corrected output; on `pass`, the booker node runs.
-
-MCP clients can also call the `audit_handoff` tool (includes `graph_id`,
-`thread_id`, `from_node`, `to_node` for LangGraph integration).
-
-Team architecture doc: [`docs/Agent-as-Judge-Current-vs-Proposed.docx`](docs/Agent-as-Judge-Current-vs-Proposed.docx)
 
 ---
 
@@ -291,48 +254,23 @@ WANDB_API_KEY=...
 If `WEAVE_PROJECT` is unset, tracing degrades to a no-op and the judge still
 runs locally — so first-run is frictionless.
 
-Quickstart (3 lines):
-
-```python
-import weave
-weave.init("agent-judge")  # tracks LLM calls + @weave.op functions
-```
-
-LangGraph demo nodes (`planner_node`, `judge_gate_node`, `booker_node`) and
-`audit_handoff` are also Weave ops, so a full orchestration run appears as one
-trace tree in W&B.
-
-Run tests (includes Weave init graceful-fallback checks):
-
-```bash
-pip install -e ".[dev]"
-pytest
-```
-
 ---
 
 ## Project structure
 
 ```
 src/agent_judge/
-  schemas.py          Pydantic input/output models (the contract)
-  handoff_schemas.py  LangGraph + evidence bundle + audit response models
-  audit.py            audit_handoff() service (Weave op, routing hints, stats)
-  llm.py              provider-agnostic JSON LLM client (OpenAI / Anthropic)
-  prompts.py          rubric-derivation + evaluation prompts
-  judge.py            derive_rubric / evaluate_rubric / aggregate_verdict / run_judge
-  tracing.py          init_weave() (graceful no-op when unconfigured)
-  server.py           FastMCP: judge_handoff + audit_handoff tools
-  cli.py              CLI wrapper with verdict-based exit codes
+  schemas.py     Pydantic input/output models (the contract)
+  llm.py         provider-agnostic JSON LLM client (OpenAI / Anthropic)
+  prompts.py     rubric-derivation + evaluation prompts
+  judge.py       derive_rubric / evaluate_rubric / aggregate_verdict / run_judge
+  tracing.py     init_weave() (graceful no-op when unconfigured)
+  server.py      FastMCP server exposing judge_handoff (stdio)
+  cli.py         CLI wrapper with verdict-based exit codes
 examples/
-  travel_demo.py              incomplete -> fail, corrected -> pass
-  langgraph_travel_demo.py    LangGraph Planner -> Judge gate -> Booker
-  run_evals.py                false-positive / false-negative / uncertain guards
-  data/                       goal + agent outputs + eval cases
-tests/                        aggregate, handoff audit, weave tracing
-docs/                         team architecture doc (Word)
-scripts/                      doc generator
-app/                          CopilotKit LLM Judge workbench (Next.js)
+  travel_demo.py incomplete -> fail, corrected -> pass
+  run_evals.py   false-positive / false-negative / uncertain guards
+  data/          goal + agent outputs + eval cases
 ```
 
 ## License
