@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "agent-judge"
-version = "0.1.0"
+version = "0.2.0"
 description = "Agent-as-Judge: an MCP server that verifies agent handoffs in multi-agent workflows."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -20,6 +20,16 @@ dependencies = [
     "python-dotenv>=1.0.0",
 ]
 
+[project.optional-dependencies]
+langgraph = [
+    "langgraph>=0.2.0",
+    "langchain-core>=0.3.0",
+]
+dev = [
+    "pytest>=8.0",
+    "python-docx>=1.0",
+]
+
 [project.scripts]
 judge-cli = "agent_judge.cli:main"
 judge-mcp = "agent_judge.server:main"
@@ -29,3 +39,7 @@ Homepage = "https://github.com/your-org/agent-judge"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/agent_judge"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
