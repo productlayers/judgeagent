@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { CopilotKit } from "@copilotkit/react-core/v2";
+import { AgentRelayCopilotProvider } from "./copilotkit-client";
 import "@copilotkit/react-core/v2/styles.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "LLM Judge",
-  description: "A CopilotKit-powered workbench for evaluating LLM responses.",
+  title: "Agent Relay",
+  description: "Audit multi-agent handoffs before the next agent acts.",
 };
 
 export default function RootLayout({
@@ -16,9 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <CopilotKit runtimeUrl="/api/copilotkit" showDevConsole>
-          {children}
-        </CopilotKit>
+        <AgentRelayCopilotProvider>{children}</AgentRelayCopilotProvider>
       </body>
     </html>
   );
