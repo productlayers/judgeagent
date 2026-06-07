@@ -1,0 +1,8 @@
+---
+description: Do not add Cursor attribution to commits or pull requests
+alwaysApply: true
+---
+
+Never add "Made-with: Cursor", "Co-authored-by: Cursor", or any Cursor attribution trailer to commits, pull request descriptions, or code comments.
+
+When creating git commits or PR bodies, use only the requested content — no tool signatures or co-author lines for Cursor.

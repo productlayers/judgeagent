@@ -1,0 +1,157 @@
+<svg width="1440" height="940" viewBox="0 0 1440 940" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Proofline live gate UI mockup</title>
+  <desc id="desc">A more distinctive mockup for an agent handoff audit UI, focused on claim versus proof, live Redis events, and a blocked downstream handoff.</desc>
+  <defs>
+    <filter id="shadow" x="-8%" y="-8%" width="116%" height="124%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#111d20" flood-opacity="0.13"/>
+    </filter>
+    <style>
+      .bg { fill: #f4f6f5; }
+      .ink { fill: #111d20; }
+      .muted { fill: #657174; }
+      .paper { fill: #ffffff; stroke: #d7dedf; stroke-width: 1; filter: url(#shadow); }
+      .flat { fill: #ffffff; stroke: #d7dedf; stroke-width: 1; }
+      .soft { fill: #eef3f2; }
+      .black { fill: #111d20; }
+      .red { fill: #b42343; }
+      .red-soft { fill: #fae7ec; }
+      .green { fill: #1f7a4d; }
+      .green-soft { fill: #e5f3eb; }
+      .amber { fill: #a96400; }
+      .amber-soft { fill: #fff2d8; }
+      .blue { fill: #296d98; }
+      .blue-soft { fill: #e4f1f8; }
+      .redis { fill: #dc382d; }
+      .line { stroke: #cbd4d6; stroke-width: 2; fill: none; }
+      .line-dark { stroke: #111d20; stroke-width: 4; fill: none; }
+      .line-red { stroke: #b42343; stroke-width: 5; fill: none; }
+      .line-green { stroke: #1f7a4d; stroke-width: 5; fill: none; }
+      .dash { stroke-dasharray: 8 8; }
+      .h0 { font: 900 58px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .h1 { font: 900 38px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .h2 { font: 850 24px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .h3 { font: 800 17px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .body { font: 500 14px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .body2 { font: 650 16px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .small { font: 850 11px Inter, Arial, sans-serif; letter-spacing: 0; text-transform: uppercase; }
+      .tiny { font: 750 10px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .mono { font: 650 12px ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1440" height="940"/>
+
+  <!-- Stage header -->
+  <rect class="black" x="28" y="24" width="1384" height="112" rx="0"/>
+  <text class="small" x="58" y="58" fill="#9fd8cf">Agent-as-Judge</text>
+  <text class="h1" x="58" y="102" fill="#ffffff">Proofline</text>
+  <text class="body2" x="252" y="72" fill="#c8d3d5">A live trust gate for agent handoffs</text>
+  <text class="body" x="252" y="99" fill="#94a7aa">The UI shows the exact moment an agent claim becomes blocked, repaired, or allowed downstream.</text>
+
+  <rect x="1034" y="48" width="154" height="64" rx="5" fill="#1d3033" stroke="#365154"/>
+  <text class="small" x="1054" y="72" fill="#b9c9cb">Flow</text>
+  <text class="h3" x="1054" y="96" fill="#ffffff">travel_v1</text>
+  <rect x="1206" y="48" width="170" height="64" rx="5" fill="#1d3033" stroke="#365154"/>
+  <circle class="redis" cx="1228" cy="80" r="8"/>
+  <text class="small" x="1246" y="72" fill="#b9c9cb">Redis Stream</text>
+  <text class="h3" x="1246" y="96" fill="#ffffff">audit:demo-42</text>
+
+  <!-- Flow import rail -->
+  <rect class="paper" x="28" y="160" width="362" height="766" rx="6"/>
+  <text class="small" x="58" y="196" fill="#296d98">Set up</text>
+  <text class="h2 ink" x="58" y="228">What flow are we auditing?</text>
+  <text class="body muted" x="58" y="254">Import a graph or describe the handoffs. The demo is preloaded.</text>
+
+  <rect class="soft" x="58" y="288" width="302" height="92" rx="5" stroke="#d2dcdd"/>
+  <text class="small muted" x="80" y="316">Flow input</text>
+  <text class="mono ink" x="80" y="342">planner -> booker</text>
+  <text class="mono muted" x="80" y="362">evidence: LangGraph state</text>
+
+  <rect class="flat" x="58" y="420" width="302" height="256" rx="6"/>
+  <text class="small" x="82" y="452" fill="#087f7a">Handoff map</text>
+  <circle class="blue-soft" cx="118" cy="514" r="34" stroke="#c5dfea"/>
+  <text class="h3 ink" x="90" y="520">Planner</text>
+  <circle class="amber-soft" cx="220" cy="514" r="34" stroke="#e3c276"/>
+  <text class="h3 ink" x="196" y="520">Judge</text>
+  <circle class="soft" cx="302" cy="514" r="34" stroke="#cfd9da"/>
+  <text class="h3 muted" x="278" y="520">Booker</text>
+  <path class="line-red" d="M152 514 C164 514 174 514 186 514"/>
+  <path class="line dash" d="M254 514 C266 514 274 514 288 514"/>
+  <rect class="red-soft" x="82" y="588" width="236" height="42" rx="5"/>
+  <text class="body2 red" x="104" y="615">Selected: planner -> booker</text>
+
+  <rect class="soft" x="58" y="714" width="302" height="158" rx="5" stroke="#d2dcdd"/>
+  <text class="small muted" x="80" y="744">Audit target</text>
+  <text class="body2 ink" x="80" y="776">Original goal</text>
+  <text class="body muted" x="80" y="804">Plan a 5-day Tokyo trip under $6,000 with flights, lodging, dietary needs, and total budget.</text>
+
+  <!-- Main moment -->
+  <rect class="paper" x="414" y="160" width="654" height="766" rx="6"/>
+  <text class="small" x="454" y="196" fill="#b42343">Live audit moment</text>
+  <text class="h0 ink" x="454" y="262">Claim.</text>
+  <text class="h0 red" x="454" y="322">Proof?</text>
+
+  <rect class="flat" x="454" y="364" width="568" height="120" rx="6"/>
+  <text class="small muted" x="484" y="396">Agent claim</text>
+  <text class="h2 ink" x="484" y="432">"Done. I created the complete itinerary."</text>
+  <text class="body muted" x="484" y="460">The planner asserts completion before the booking agent runs.</text>
+
+  <line class="line-dark" x1="516" y1="540" x2="968" y2="540"/>
+  <circle class="black" cx="516" cy="540" r="10"/>
+  <circle class="red" cx="666" cy="540" r="18"/>
+  <circle class="soft" cx="818" cy="540" r="10" stroke="#cbd4d6"/>
+  <circle class="soft" cx="968" cy="540" r="10" stroke="#cbd4d6"/>
+  <text class="small ink" x="482" y="580">Planner</text>
+  <text class="small red" x="623" y="580">Judge stops here</text>
+  <text class="small muted" x="788" y="580">Booker</text>
+  <text class="small muted" x="934" y="580">Notify</text>
+
+  <rect class="red-soft" x="454" y="630" width="568" height="116" rx="6" stroke="#efbdc8"/>
+  <text class="small" x="484" y="662" fill="#b42343">Verdict</text>
+  <text class="h1 red" x="484" y="710">BOOKER BLOCKED</text>
+  <text class="body2 ink" x="484" y="734">The handoff cannot continue because critical proof is missing.</text>
+
+  <rect class="soft" x="454" y="780" width="172" height="72" rx="5" stroke="#d2dcdd"/>
+  <text class="small muted" x="478" y="808">Missing proof</text>
+  <text class="h2 ink" x="478" y="836">Flights</text>
+  <rect class="soft" x="650" y="780" width="172" height="72" rx="5" stroke="#d2dcdd"/>
+  <text class="small muted" x="674" y="808">Most dangerous</text>
+  <text class="h2 ink" x="674" y="836">Budget</text>
+  <rect class="soft" x="846" y="780" width="176" height="72" rx="5" stroke="#d2dcdd"/>
+  <text class="small muted" x="870" y="808">Next route</text>
+  <text class="h2 ink" x="870" y="836">Retry planner</text>
+
+  <!-- Right rail -->
+  <rect class="paper" x="1092" y="160" width="320" height="766" rx="6"/>
+  <text class="small" x="1122" y="196" fill="#087f7a">What changed?</text>
+  <text class="h2 ink" x="1122" y="228">The judge made the failure actionable.</text>
+
+  <rect class="green-soft" x="1122" y="266" width="260" height="98" rx="6" stroke="#cbe7d5"/>
+  <text class="small" x="1144" y="296" fill="#1f7a4d">Before Judge</text>
+  <text class="h3 ink" x="1144" y="326">Silent propagation</text>
+  <text class="body muted" x="1144" y="350">Booker trusts the planner's claim.</text>
+
+  <rect class="red-soft" x="1122" y="386" width="260" height="118" rx="6" stroke="#efbdc8"/>
+  <text class="small" x="1144" y="416" fill="#b42343">With Judge</text>
+  <text class="h3 ink" x="1144" y="446">Proof required</text>
+  <text class="body muted" x="1144" y="470">Claim is checked against evidence before downstream action.</text>
+
+  <rect class="blue-soft" x="1122" y="542" width="260" height="132" rx="6" stroke="#c7e1ef"/>
+  <text class="small" x="1144" y="572" fill="#296d98">Copilot repair</text>
+  <text class="h3 ink" x="1144" y="604">Evidence contract</text>
+  <text class="body muted" x="1144" y="628">Patch planner prompt to require flights, summed budget, and dietary proof.</text>
+  <rect class="blue" x="1144" y="646" width="126" height="36" rx="5"/>
+  <text class="body2" x="1170" y="670" fill="#ffffff">Apply</text>
+
+  <rect class="soft" x="1122" y="722" width="260" height="164" rx="6" stroke="#d2dcdd"/>
+  <text class="small" x="1144" y="752" fill="#dc382d">Redis event tape</text>
+  <text class="mono ink" x="1144" y="782">XADD audit:42 *</text>
+  <text class="mono muted" x="1144" y="810">audit.started</text>
+  <text class="mono muted" x="1144" y="838">criterion.failed budget</text>
+  <text class="mono muted" x="1144" y="866">handoff.blocked</text>
+
+  <!-- Live ticker across bottom of main panel -->
+  <rect x="454" y="882" width="568" height="40" rx="5" fill="#111d20"/>
+  <circle class="redis" cx="478" cy="902" r="7"/>
+  <text class="mono" x="494" y="906" fill="#ffffff">live: criterion.failed -> budget_total | verdict.computed -> fail | route -> planner</text>
+</svg>

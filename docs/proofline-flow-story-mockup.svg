@@ -1,0 +1,139 @@
+<svg width="1440" height="940" viewBox="0 0 1440 940" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Proofline flow story mockup</title>
+  <desc id="desc">A plain-language UI mockup showing a multi-agent flow being audited, the current step, what the agent claims, what Judge is checking, why the next step is paused, and what can fix it.</desc>
+  <defs>
+    <filter id="shadow" x="-8%" y="-8%" width="116%" height="124%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#101b1e" flood-opacity="0.12"/>
+    </filter>
+    <style>
+      .bg { fill: #f5f7f6; }
+      .ink { fill: #111d20; }
+      .muted { fill: #687679; }
+      .dark { fill: #111d20; }
+      .panel { fill: #ffffff; stroke: #d8e0e1; stroke-width: 1; filter: url(#shadow); }
+      .flat { fill: #ffffff; stroke: #d8e0e1; stroke-width: 1; }
+      .soft { fill: #eef4f3; }
+      .red { fill: #b42343; }
+      .red-soft { fill: #fae8ec; }
+      .green { fill: #1f7a4d; }
+      .green-soft { fill: #e5f4eb; }
+      .amber { fill: #a96400; }
+      .amber-soft { fill: #fff1d6; }
+      .blue { fill: #296d98; }
+      .blue-soft { fill: #e4f1f8; }
+      .teal { fill: #087f7a; }
+      .teal-soft { fill: #dff2ee; }
+      .redis { fill: #dc382d; }
+      .line { stroke: #cbd5d6; stroke-width: 2; fill: none; }
+      .line-active { stroke: #111d20; stroke-width: 5; fill: none; }
+      .line-paused { stroke: #b42343; stroke-width: 5; fill: none; stroke-dasharray: 10 8; }
+      .h1 { font: 900 40px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .h2 { font: 850 28px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .h3 { font: 800 20px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .body { font: 500 16px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .body2 { font: 650 17px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .strong { font: 850 16px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .small { font: 850 11px Inter, Arial, sans-serif; letter-spacing: 0; text-transform: uppercase; }
+      .tiny { font: 750 10px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .mono { font: 650 12px ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1440" height="940"/>
+
+  <!-- Header -->
+  <rect class="dark" x="32" y="28" width="1376" height="104"/>
+  <text class="small" x="64" y="62" fill="#9fd8cf">Proofline</text>
+  <text class="h1" x="64" y="104" fill="#ffffff">Watch an agent handoff get checked before the next step runs</text>
+  <rect x="1114" y="52" width="162" height="56" rx="5" fill="#1e3437" stroke="#365154"/>
+  <text class="small" x="1134" y="74" fill="#b9c9cb">Mode</text>
+  <text class="h3" x="1134" y="98" fill="#ffffff">Trace replay</text>
+  <rect x="1292" y="52" width="84" height="56" rx="5" fill="#1e3437" stroke="#365154"/>
+  <circle class="redis" cx="1318" cy="80" r="8"/>
+  <text class="small" x="1334" y="84" fill="#ffffff">Live</text>
+
+  <!-- Visual flow -->
+  <rect class="panel" x="32" y="158" width="1376" height="250" rx="6"/>
+  <text class="small" x="64" y="194" fill="#087f7a">Flow being checked</text>
+  <text class="h2 ink" x="64" y="228">Trip request -> Planner -> Judge check -> Booker</text>
+  <text class="body muted" x="64" y="258">The user can import any agent flow. This demo replays one travel-planning handoff from a saved trace.</text>
+
+  <g transform="translate(80 302)">
+    <rect class="flat" x="0" y="0" width="184" height="64" rx="6"/>
+    <text class="small muted" x="24" y="26">Step 1</text>
+    <text class="h3 ink" x="24" y="50">Trip request</text>
+    <path class="line-active" d="M184 32 C220 32 242 32 276 32"/>
+    <rect class="flat" x="276" y="0" width="184" height="64" rx="6"/>
+    <text class="small muted" x="300" y="26">Step 2</text>
+    <text class="h3 ink" x="300" y="50">Planner writes plan</text>
+    <path class="line-active" d="M460 32 C496 32 518 32 552 32"/>
+    <rect class="amber-soft" x="552" y="-8" width="204" height="80" rx="8" stroke="#e6c67b" stroke-width="2"/>
+    <text class="small" x="580" y="24" fill="#a96400">Checking now</text>
+    <text class="h3 ink" x="580" y="52">Judge checks proof</text>
+    <path class="line-paused" d="M756 32 C792 32 814 32 848 32"/>
+    <rect class="red-soft" x="848" y="0" width="184" height="64" rx="6" stroke="#efbec8"/>
+    <text class="small" x="872" y="26" fill="#b42343">Paused</text>
+    <text class="h3 ink" x="872" y="50">Booker waits</text>
+    <path class="line" d="M1032 32 C1068 32 1090 32 1124 32"/>
+    <rect class="flat" x="1124" y="0" width="184" height="64" rx="6"/>
+    <text class="small muted" x="1148" y="26">Step 5</text>
+    <text class="h3 muted" x="1148" y="50">Notify user</text>
+  </g>
+
+  <!-- What is happening -->
+  <rect class="panel" x="32" y="434" width="430" height="438" rx="6"/>
+  <text class="small" x="64" y="470" fill="#296d98">What is happening</text>
+  <text class="h2 ink" x="64" y="504">The Planner says the trip is ready.</text>
+  <rect class="blue-soft" x="64" y="540" width="366" height="112" rx="6" stroke="#c7e1ef"/>
+  <text class="small" x="90" y="574" fill="#296d98">Agent claim</text>
+  <text class="body2 ink" x="90" y="606">"I created the complete trip plan."</text>
+  <text class="body muted" x="90" y="632">Judge does not trust the claim by itself. It checks the actual plan and artifacts.</text>
+
+  <rect class="soft" x="64" y="690" width="366" height="128" rx="6" stroke="#d2dcdd"/>
+  <text class="small muted" x="90" y="724">What Judge is checking</text>
+  <text class="body2 ink" x="90" y="756">Does the evidence prove the original request?</text>
+  <text class="body muted" x="90" y="784">In this example, the original request included a budget limit, flights, lodging, dietary needs, and a complete itinerary.</text>
+
+  <!-- Why not happening -->
+  <rect class="panel" x="492" y="434" width="464" height="438" rx="6"/>
+  <text class="small" x="524" y="470" fill="#b42343">Why the next step is not happening</text>
+  <text class="h2 red" x="524" y="504">Booker is paused.</text>
+  <text class="body2 ink" x="524" y="538">The plan is not ready to hand off.</text>
+
+  <rect class="red-soft" x="524" y="576" width="400" height="86" rx="6" stroke="#efbec8"/>
+  <text class="strong ink" x="550" y="608">The budget is not proven.</text>
+  <text class="body muted" x="550" y="634">The plan says it is under budget, but does not show the math.</text>
+
+  <rect class="red-soft" x="524" y="684" width="400" height="86" rx="6" stroke="#efbec8"/>
+  <text class="strong ink" x="550" y="716">Flights are missing.</text>
+  <text class="body muted" x="550" y="742">Booker cannot book a trip when a required part of the trip is absent.</text>
+
+  <rect class="amber-soft" x="524" y="792" width="400" height="44" rx="6" stroke="#efcf8f"/>
+  <text class="body2 amber" x="550" y="820">This is a demo-specific finding from the travel trace.</text>
+
+  <!-- What can fix it -->
+  <rect class="panel" x="986" y="434" width="422" height="438" rx="6"/>
+  <text class="small" x="1018" y="470" fill="#087f7a">What can fix it</text>
+  <text class="h2 ink" x="1018" y="504">Send the Planner a proof request.</text>
+  <text class="body muted" x="1018" y="532">CopilotKit turns the audit into concrete next actions.</text>
+
+  <rect class="green-soft" x="1018" y="570" width="358" height="82" rx="6" stroke="#cbe8d5"/>
+  <text class="small" x="1044" y="600" fill="#1f7a4d">Recommended action</text>
+  <text class="h3 ink" x="1044" y="628">Ask for missing proof</text>
+  <rect class="green" x="1044" y="650" width="132" height="38" rx="5"/>
+  <text class="strong" x="1070" y="675" fill="#ffffff">Send</text>
+
+  <rect class="flat" x="1018" y="716" width="358" height="94" rx="6"/>
+  <text class="small muted" x="1044" y="746">Suggested message</text>
+  <text class="body ink" x="1044" y="776">"Please return flights and a budget table that proves the trip stays under the limit."</text>
+
+  <rect class="soft" x="1018" y="832" width="172" height="44" rx="5" stroke="#d2dcdd"/>
+  <text class="strong ink" x="1044" y="860">Retry Planner</text>
+  <rect class="soft" x="1204" y="832" width="172" height="44" rx="5" stroke="#d2dcdd"/>
+  <text class="strong ink" x="1228" y="860">Save Guard</text>
+
+  <!-- Redis note -->
+  <rect x="32" y="896" width="1376" height="44" fill="#111d20"/>
+  <circle class="redis" cx="64" cy="918" r="7"/>
+  <text class="mono" x="82" y="922" fill="#ffffff">Redis Stream replay: audit started -> planner claim checked -> missing proof found -> Booker paused -> action suggested</text>
+</svg>

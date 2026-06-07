@@ -1,0 +1,164 @@
+<svg width="1440" height="940" viewBox="0 0 1440 940" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Proofline polished live flow mockup</title>
+  <desc id="desc">A polished, plain-language UI mockup for connecting an agent flow to Proofline and watching a selected agent handoff get checked live.</desc>
+  <defs>
+    <filter id="shadow" x="-8%" y="-8%" width="116%" height="124%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#102124" flood-opacity="0.14"/>
+    </filter>
+    <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#b66a00" flood-opacity="0.38"/>
+    </filter>
+    <linearGradient id="headerGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#102124"/>
+      <stop offset="0.62" stop-color="#172b2f"/>
+      <stop offset="1" stop-color="#26383b"/>
+    </linearGradient>
+    <linearGradient id="stageWash" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f2f7f6"/>
+    </linearGradient>
+    <style>
+      .bg { fill: #f3f6f5; }
+      .ink { fill: #101f22; }
+      .muted { fill: #667578; }
+      .dark { fill: #101f22; }
+      .panel { fill: url(#stageWash); stroke: #d7e0e1; stroke-width: 1; filter: url(#shadow); }
+      .flat { fill: #ffffff; stroke: #d7e0e1; stroke-width: 1; }
+      .soft { fill: #edf4f3; }
+      .red { fill: #b42343; }
+      .red-soft { fill: #fae8ec; }
+      .green { fill: #1f7a4d; }
+      .green-soft { fill: #e5f4eb; }
+      .amber { fill: #a96400; }
+      .amber-soft { fill: #fff1d6; }
+      .blue { fill: #296d98; }
+      .blue-soft { fill: #e4f1f8; }
+      .teal { fill: #087f7a; }
+      .teal-soft { fill: #dff2ee; }
+      .redis { fill: #dc382d; }
+      .line { stroke: #cbd5d6; stroke-width: 2; fill: none; }
+      .line-active { stroke: #101f22; stroke-width: 5; fill: none; }
+      .line-paused { stroke: #b42343; stroke-width: 5; fill: none; stroke-dasharray: 12 9; }
+      .h1 { font: 900 38px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .h2 { font: 850 27px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .h3 { font: 800 19px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .body { font: 500 15px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .body2 { font: 650 16px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .strong { font: 850 15px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .small { font: 850 11px Inter, Arial, sans-serif; letter-spacing: 0; text-transform: uppercase; }
+      .tiny { font: 750 10px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .mono { font: 650 12px ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0; }
+      .pulse { animation: pulse 1.8s ease-in-out infinite; transform-origin: center; }
+      .slide { animation: slide 2.4s linear infinite; }
+      .blink { animation: blink 1.2s ease-in-out infinite; }
+      @keyframes pulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.72; transform: scale(1.035); }
+      }
+      @keyframes slide {
+        0% { stroke-dashoffset: 0; }
+        100% { stroke-dashoffset: -42; }
+      }
+      @keyframes blink {
+        0%, 100% { opacity: 0.35; }
+        50% { opacity: 1; }
+      }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1440" height="940"/>
+
+  <!-- Header -->
+  <rect x="32" y="28" width="1376" height="102" rx="0" fill="url(#headerGrad)"/>
+  <text class="small" x="64" y="62" fill="#9fd8cf">Proofline</text>
+  <text class="h1" x="64" y="103" fill="#ffffff">Your agent says it is done. Proofline checks before the next agent acts.</text>
+  <rect x="1130" y="52" width="132" height="56" rx="5" fill="#21383b" stroke="#3a5558"/>
+  <text class="small" x="1150" y="74" fill="#b9c9cb">Replay</text>
+  <text class="h3" x="1150" y="99" fill="#ffffff">Attempt 1</text>
+  <rect x="1278" y="52" width="96" height="56" rx="5" fill="#21383b" stroke="#3a5558"/>
+  <circle class="redis blink" cx="1304" cy="80" r="8"/>
+  <text class="small" x="1322" y="84" fill="#ffffff">Live</text>
+
+  <!-- Connect strip -->
+  <rect class="panel" x="32" y="152" width="1376" height="112" rx="8"/>
+  <text class="small" x="64" y="188" fill="#296d98">Connect your agent flow</text>
+  <text class="h2 ink" x="64" y="222">Travel Planner is linked through the audit handoff API</text>
+  <text class="body muted" x="64" y="246">Builders can connect by MCP, API, LangGraph state, or a saved trace. This replay uses a travel-planner trace.</text>
+  <rect class="soft" x="606" y="178" width="262" height="46" rx="5" stroke="#d2dcdd"/>
+  <text class="mono ink" x="626" y="207">POST /audit/handoff</text>
+  <rect class="soft" x="886" y="178" width="222" height="46" rx="5" stroke="#d2dcdd"/>
+  <text class="mono ink" x="906" y="207">MCP: audit_handoff</text>
+  <rect class="soft" x="1126" y="178" width="156" height="46" rx="5" stroke="#d2dcdd"/>
+  <text class="mono ink" x="1146" y="207">trace_id: 42</text>
+  <rect class="teal" x="1298" y="178" width="76" height="46" rx="5"/>
+  <text class="strong" x="1320" y="207" fill="#ffffff">Link</text>
+
+  <!-- Visual flow -->
+  <rect class="panel" x="32" y="292" width="1376" height="228" rx="8"/>
+  <text class="small" x="64" y="328" fill="#087f7a">Flow being checked</text>
+  <text class="h2 ink" x="64" y="362">Trip request -> Planner -> Proofline check -> Booker</text>
+
+  <g transform="translate(80 408)">
+    <rect class="flat" x="0" y="0" width="176" height="64" rx="7"/>
+    <text class="small muted" x="22" y="26">Step 1</text>
+    <text class="h3 ink" x="22" y="50">Trip request</text>
+    <path class="line-active" d="M176 32 C212 32 234 32 268 32"/>
+    <path class="line-active slide" d="M176 32 C212 32 234 32 268 32"/>
+    <rect class="flat" x="268" y="0" width="196" height="64" rx="7"/>
+    <text class="small muted" x="292" y="26">Step 2</text>
+    <text class="h3 ink" x="292" y="50">Planner writes plan</text>
+    <path class="line-active" d="M464 32 C500 32 522 32 556 32"/>
+    <path class="line-active slide" d="M464 32 C500 32 522 32 556 32"/>
+    <rect class="amber-soft pulse" x="556" y="-12" width="220" height="88" rx="10" stroke="#e0bc68" stroke-width="2" filter="url(#softGlow)"/>
+    <text class="small" x="586" y="23" fill="#a96400">Checking now</text>
+    <text class="h3 ink" x="586" y="52">Proofline checks</text>
+    <path class="line-paused slide" d="M776 32 C812 32 834 32 868 32"/>
+    <rect class="red-soft" x="868" y="0" width="176" height="64" rx="7" stroke="#efbec8"/>
+    <text class="small" x="892" y="26" fill="#b42343">Paused</text>
+    <text class="h3 ink" x="892" y="50">Booker waits</text>
+    <path class="line" d="M1044 32 C1080 32 1102 32 1136 32"/>
+    <rect class="flat" x="1136" y="0" width="176" height="64" rx="7"/>
+    <text class="small muted" x="1160" y="26">Step 5</text>
+    <text class="h3 muted" x="1160" y="50">Notify user</text>
+  </g>
+
+  <!-- Three cards -->
+  <rect class="panel" x="32" y="548" width="430" height="336" rx="8"/>
+  <text class="small" x="64" y="584" fill="#296d98">What is happening</text>
+  <text class="h2 ink" x="64" y="620">The Planner says the trip is ready.</text>
+  <rect class="blue-soft" x="64" y="656" width="366" height="94" rx="7" stroke="#c7e1ef"/>
+  <text class="small" x="90" y="688" fill="#296d98">Agent claim</text>
+  <text class="body2 ink" x="90" y="718">"I created the complete trip plan."</text>
+  <text class="body muted" x="64" y="786">Proofline checks the actual plan, not just the agent's confidence.</text>
+
+  <rect class="panel" x="492" y="548" width="464" height="336" rx="8"/>
+  <text class="small" x="524" y="584" fill="#b42343">Why Booker is paused</text>
+  <text class="h2 red" x="524" y="620">The handoff is not safe yet.</text>
+  <rect class="red-soft" x="524" y="656" width="400" height="70" rx="7" stroke="#efbec8"/>
+  <text class="strong ink" x="550" y="686">Budget is not proven.</text>
+  <text class="body muted" x="550" y="710">The plan says under budget, but does not show the math.</text>
+  <rect class="red-soft" x="524" y="746" width="400" height="70" rx="7" stroke="#efbec8"/>
+  <text class="strong ink" x="550" y="776">Flights are missing.</text>
+  <text class="body muted" x="550" y="800">Booker cannot book a required part that is absent.</text>
+  <text class="body muted" x="524" y="850">These findings come from this travel trace. In another flow, this area changes to that flow's missing proof.</text>
+
+  <rect class="panel" x="986" y="548" width="422" height="336" rx="8"/>
+  <text class="small" x="1018" y="584" fill="#087f7a">What can fix it</text>
+  <text class="h2 ink" x="1018" y="620">Ask Planner for proof.</text>
+  <rect class="green-soft" x="1018" y="656" width="358" height="76" rx="7" stroke="#cbe8d5"/>
+  <text class="small" x="1044" y="686" fill="#1f7a4d">Recommended</text>
+  <text class="h3 ink" x="1044" y="712">Send missing-proof request</text>
+  <rect class="flat" x="1018" y="760" width="358" height="70" rx="7"/>
+  <text class="body ink" x="1044" y="790">"Show flights and budget math before Booker runs."</text>
+  <rect class="green" x="1018" y="848" width="126" height="42" rx="5"/>
+  <text class="strong" x="1048" y="875" fill="#ffffff">Send</text>
+  <rect class="soft" x="1162" y="848" width="126" height="42" rx="5" stroke="#d2dcdd"/>
+  <text class="strong ink" x="1188" y="875">Retry</text>
+  <rect class="soft" x="1306" y="848" width="70" height="42" rx="5" stroke="#d2dcdd"/>
+  <text class="strong ink" x="1324" y="875">Save</text>
+
+  <!-- Bottom event line -->
+  <rect x="32" y="906" width="1376" height="34" fill="#101f22"/>
+  <circle class="redis blink" cx="64" cy="923" r="6"/>
+  <text class="mono" x="82" y="927" fill="#ffffff">Redis Stream: travel trace replay -> claim checked -> missing proof found -> Booker paused -> action suggested</text>
+</svg>

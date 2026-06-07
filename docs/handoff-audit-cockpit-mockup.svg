@@ -1,0 +1,205 @@
+<svg width="1440" height="940" viewBox="0 0 1440 940" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Agent Handoff Audit Cockpit UI mockup</title>
+  <desc id="desc">A dashboard mockup showing an agent workflow graph, judge verdict, rubric evidence matrix, timeline, metrics, and Copilot repair panel.</desc>
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#142528" flood-opacity="0.12"/>
+    </filter>
+    <style>
+      .page { fill: #f4f7f6; }
+      .ink { fill: #162326; }
+      .muted { fill: #66777b; }
+      .soft { fill: #eef4f3; }
+      .panel { fill: #ffffff; stroke: #d7e0e1; stroke-width: 1; filter: url(#shadow); }
+      .panel-flat { fill: #ffffff; stroke: #d7e0e1; stroke-width: 1; }
+      .top { fill: #122326; }
+      .teal { fill: #0b7e78; }
+      .teal-soft { fill: #dff2ee; }
+      .green { fill: #1f7a4d; }
+      .green-soft { fill: #e4f4eb; }
+      .red { fill: #b42343; }
+      .red-soft { fill: #fbe7ec; }
+      .amber { fill: #b66a00; }
+      .amber-soft { fill: #fff1d6; }
+      .blue { fill: #296d98; }
+      .blue-soft { fill: #e4f1f8; }
+      .line { stroke: #cbd7d8; stroke-width: 2; fill: none; }
+      .line-red { stroke: #b42343; stroke-width: 4; fill: none; }
+      .line-green { stroke: #1f7a4d; stroke-width: 4; fill: none; }
+      .line-amber { stroke: #b66a00; stroke-width: 4; fill: none; stroke-dasharray: 8 8; }
+      .h1 { font: 800 38px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .h2 { font: 800 20px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .h3 { font: 800 15px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .body { font: 500 14px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .small { font: 700 11px Inter, Arial, sans-serif; letter-spacing: 0; text-transform: uppercase; }
+      .tiny { font: 600 10px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .metric { font: 900 30px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .mono { font: 600 12px ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0; }
+    </style>
+  </defs>
+
+  <rect class="page" width="1440" height="940"/>
+
+  <!-- Header -->
+  <rect class="top" x="28" y="24" width="1384" height="104" rx="0"/>
+  <text class="small" x="58" y="58" fill="#89d9ce">Agent-as-Judge / Runtime audit cockpit</text>
+  <text class="h1" x="58" y="100" fill="#ffffff">Travel Pipeline Handoff Audit</text>
+  <rect x="982" y="48" width="118" height="56" rx="4" fill="#1e363a" stroke="#355256"/>
+  <text class="small" x="1002" y="71" fill="#b8c9cb">Graph</text>
+  <text class="h3" x="1002" y="93" fill="#ffffff">travel_v1</text>
+  <rect x="1116" y="48" width="118" height="56" rx="4" fill="#1e363a" stroke="#355256"/>
+  <text class="small" x="1136" y="71" fill="#b8c9cb">Thread</text>
+  <text class="h3" x="1136" y="93" fill="#ffffff">demo-42</text>
+  <rect x="1250" y="48" width="132" height="56" rx="4" fill="#1e363a" stroke="#355256"/>
+  <text class="small" x="1270" y="71" fill="#b8c9cb">Last event</text>
+  <text class="h3" x="1270" y="93" fill="#ffffff">attempt 1</text>
+
+  <!-- Main graph panel -->
+  <rect class="panel" x="28" y="150" width="656" height="348" rx="6"/>
+  <text class="small" x="58" y="184" fill="#0b7e78">Workflow graph</text>
+  <text class="h2 ink" x="58" y="212">Where the handoff failed</text>
+  <text class="body muted" x="58" y="238">Click an edge to inspect the claim, evidence, and judge route.</text>
+
+  <!-- Graph nodes -->
+  <rect class="panel-flat" x="70" y="302" width="148" height="84" rx="6"/>
+  <circle class="blue-soft" cx="96" cy="330" r="14"/>
+  <text class="h3 ink" x="120" y="333">Planner</text>
+  <text class="body muted" x="90" y="361">claims done</text>
+
+  <circle class="amber-soft" cx="344" cy="344" r="52" stroke="#b66a00" stroke-width="2"/>
+  <text class="small" x="302" y="333" fill="#b66a00">Judge gate</text>
+  <text class="h3 ink" x="300" y="358">audit_handoff</text>
+
+  <rect class="panel-flat" x="472" y="302" width="148" height="84" rx="6"/>
+  <circle class="green-soft" cx="498" cy="330" r="14"/>
+  <text class="h3 ink" x="522" y="333">Booker</text>
+  <text class="body muted" x="492" y="361">locked</text>
+
+  <rect class="panel-flat" x="270" y="424" width="148" height="52" rx="6"/>
+  <text class="h3 ink" x="294" y="447">Human review</text>
+  <text class="tiny muted" x="304" y="466">only for uncertain</text>
+
+  <path class="line-red" d="M218 344 C250 344 270 344 292 344"/>
+  <path class="line" d="M396 344 C424 344 444 344 472 344"/>
+  <path class="line-amber" d="M344 396 C344 410 344 416 344 424"/>
+  <path class="line-green" d="M108 386 C150 454 246 502 344 502 C442 502 528 454 556 386"/>
+  <text class="small" x="232" y="324" fill="#b42343">blocked</text>
+  <text class="small" x="500" y="285" fill="#66777b">not reached</text>
+  <text class="small" x="320" y="526" fill="#1f7a4d">retry path after fix</text>
+
+  <!-- Verdict panel -->
+  <rect class="panel" x="708" y="150" width="332" height="348" rx="6"/>
+  <text class="small" x="738" y="184" fill="#b42343">Current verdict</text>
+  <rect class="red-soft" x="738" y="204" width="272" height="112" rx="6" stroke="#f1bdc8"/>
+  <text class="small" x="762" y="236" fill="#b42343">Handoff status</text>
+  <text class="metric red" x="762" y="279">BLOCKED</text>
+  <text class="body ink" x="762" y="302">can_continue = false</text>
+
+  <rect class="soft" x="738" y="336" width="126" height="62" rx="4"/>
+  <text class="small muted" x="756" y="360">Confidence</text>
+  <text class="h2 ink" x="756" y="386">0.86</text>
+  <rect class="soft" x="884" y="336" width="126" height="62" rx="4"/>
+  <text class="small muted" x="902" y="360">Next node</text>
+  <text class="h2 ink" x="902" y="386">planner</text>
+  <rect class="soft" x="738" y="414" width="272" height="54" rx="4"/>
+  <text class="small muted" x="756" y="437">Suggested route</text>
+  <text class="body ink" x="756" y="459">Block downstream booking, retry planner with missing proof.</text>
+
+  <!-- Copilot panel -->
+  <rect class="panel" x="1064" y="150" width="348" height="348" rx="6"/>
+  <text class="small" x="1094" y="184" fill="#296d98">CopilotKit repair loop</text>
+  <text class="h2 ink" x="1094" y="212">Fix the agent, not the demo</text>
+  <rect class="blue-soft" x="1094" y="238" width="288" height="70" rx="6" stroke="#c8e3f1"/>
+  <text class="h3 ink" x="1114" y="264">Patch planner prompt</text>
+  <text class="body muted" x="1114" y="287">Require flights, dietary constraints, and itemized total.</text>
+  <rect class="green-soft" x="1094" y="322" width="138" height="48" rx="4" stroke="#cae8d5"/>
+  <text class="h3 green" x="1116" y="352">Apply patch</text>
+  <rect class="amber-soft" x="1244" y="322" width="138" height="48" rx="4" stroke="#f2d08c"/>
+  <text class="h3 amber" x="1261" y="352">Ask evidence</text>
+  <rect class="soft" x="1094" y="386" width="288" height="82" rx="4"/>
+  <text class="small muted" x="1114" y="410">Assistant explanation</text>
+  <text class="body ink" x="1114" y="434">"The planner claimed completion, but the evidence never proves the explicit budget and flight requirements."</text>
+
+  <!-- Rubric matrix -->
+  <rect class="panel" x="28" y="522" width="1012" height="270" rx="6"/>
+  <text class="small" x="58" y="556" fill="#0b7e78">Rubric vs evidence matrix</text>
+  <text class="h2 ink" x="58" y="584">What the agent claimed vs what the evidence proves</text>
+
+  <rect x="58" y="610" width="952" height="34" rx="0" fill="#eef4f3"/>
+  <text class="small muted" x="78" y="632">Requirement</text>
+  <text class="small muted" x="442" y="632">Weight</text>
+  <text class="small muted" x="530" y="632">Status</text>
+  <text class="small muted" x="672" y="632">Evidence quote</text>
+  <text class="small muted" x="910" y="632">Action</text>
+
+  <g>
+    <rect x="58" y="646" width="952" height="36" fill="#ffffff"/>
+    <text class="body ink" x="78" y="669">Include round-trip flights for family of four</text>
+    <text class="body ink" x="452" y="669">2.0</text>
+    <rect class="red-soft" x="530" y="654" width="116" height="22" rx="11"/>
+    <text class="tiny red" x="551" y="669">not_satisfied</text>
+    <text class="body muted" x="672" y="669">No flight costs appear</text>
+    <text class="body red" x="910" y="669">retry planner</text>
+  </g>
+  <g>
+    <rect x="58" y="682" width="952" height="36" fill="#fbfdfc"/>
+    <text class="body ink" x="78" y="705">Stay under $6,000 with total cost breakdown</text>
+    <text class="body ink" x="452" y="705">2.0</text>
+    <rect class="red-soft" x="530" y="690" width="116" height="22" rx="11"/>
+    <text class="tiny red" x="551" y="705">not_satisfied</text>
+    <text class="body muted" x="672" y="705">Budget is asserted, not summed</text>
+    <text class="body red" x="910" y="705">ask total</text>
+  </g>
+  <g>
+    <rect x="58" y="718" width="952" height="36" fill="#ffffff"/>
+    <text class="body ink" x="78" y="741">Respect vegetarian dietary constraints</text>
+    <text class="body ink" x="452" y="741">1.5</text>
+    <rect class="amber-soft" x="530" y="726" width="116" height="22" rx="11"/>
+    <text class="tiny amber" x="557" y="741">unsupported</text>
+    <text class="body muted" x="672" y="741">Meals listed without constraint proof</text>
+    <text class="body amber" x="910" y="741">gather proof</text>
+  </g>
+  <g>
+    <rect x="58" y="754" width="952" height="36" fill="#fbfdfc"/>
+    <text class="body ink" x="78" y="777">Provide 5-day activity itinerary</text>
+    <text class="body ink" x="452" y="777">1.0</text>
+    <rect class="green-soft" x="530" y="762" width="116" height="22" rx="11"/>
+    <text class="tiny green" x="568" y="777">satisfied</text>
+    <text class="body muted" x="672" y="777">Days 1-5 are present</text>
+    <text class="body green" x="910" y="777">keep</text>
+  </g>
+
+  <!-- Metrics and timeline -->
+  <rect class="panel" x="1064" y="522" width="348" height="270" rx="6"/>
+  <text class="small" x="1094" y="556" fill="#0b7e78">Edge health</text>
+  <text class="h2 ink" x="1094" y="584">planner -> booker</text>
+
+  <rect class="soft" x="1094" y="610" width="132" height="64" rx="4"/>
+  <text class="small muted" x="1114" y="634">Pass rate</text>
+  <text class="h2 ink" x="1114" y="660">50%</text>
+  <rect class="soft" x="1248" y="610" width="132" height="64" rx="4"/>
+  <text class="small muted" x="1268" y="634">Bad blocks</text>
+  <text class="h2 ink" x="1268" y="660">1</text>
+
+  <rect class="soft" x="1094" y="690" width="132" height="64" rx="4"/>
+  <text class="small muted" x="1114" y="714">Retry recovery</text>
+  <text class="h2 ink" x="1114" y="740">100%</text>
+  <rect class="soft" x="1248" y="690" width="132" height="64" rx="4"/>
+  <text class="small muted" x="1268" y="714">Top gap</text>
+  <text class="h2 ink" x="1268" y="740">budget</text>
+
+  <!-- Bottom timeline -->
+  <rect class="panel" x="28" y="816" width="1384" height="92" rx="6"/>
+  <text class="small" x="58" y="850" fill="#0b7e78">Demo timeline</text>
+  <circle class="red" cx="228" cy="864" r="10"/>
+  <text class="h3 ink" x="250" y="869">Attempt 1: planner claims done</text>
+  <line class="line" x1="462" y1="864" x2="610" y2="864"/>
+  <circle class="red" cx="622" cy="864" r="10"/>
+  <text class="h3 ink" x="644" y="869">Judge blocks missing proof</text>
+  <line class="line" x1="844" y1="864" x2="960" y2="864"/>
+  <circle class="blue" cx="972" cy="864" r="10"/>
+  <text class="h3 ink" x="994" y="869">Copilot applies repair</text>
+  <line class="line" x1="1180" y1="864" x2="1260" y2="864"/>
+  <circle class="green" cx="1272" cy="864" r="10"/>
+  <text class="h3 ink" x="1294" y="869">Retry passes</text>
+</svg>

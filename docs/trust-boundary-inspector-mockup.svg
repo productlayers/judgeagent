@@ -1,0 +1,186 @@
+<svg width="1440" height="940" viewBox="0 0 1440 940" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Trust Boundary Inspector UI mockup</title>
+  <desc id="desc">A focused user-facing UI mockup for auditing multi-agent handoffs with a generic flow input, selected trust boundary, punchy insights, CopilotKit repair actions, and a Redis-powered live event stream.</desc>
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#142528" flood-opacity="0.12"/>
+    </filter>
+    <style>
+      .bg { fill: #f5f7f7; }
+      .header { fill: #122326; }
+      .panel { fill: #ffffff; stroke: #d8e0e1; stroke-width: 1; filter: url(#shadow); }
+      .flat { fill: #ffffff; stroke: #d8e0e1; stroke-width: 1; }
+      .soft { fill: #eef4f3; }
+      .soft2 { fill: #f8fbfa; }
+      .ink { fill: #152427; }
+      .muted { fill: #66787b; }
+      .line { stroke: #ccd8d9; stroke-width: 2; fill: none; }
+      .line-red { stroke: #b42343; stroke-width: 4; fill: none; }
+      .line-green { stroke: #1f7a4d; stroke-width: 4; fill: none; }
+      .red { fill: #b42343; }
+      .red-soft { fill: #fbe7ec; }
+      .green { fill: #1f7a4d; }
+      .green-soft { fill: #e5f4eb; }
+      .amber { fill: #b66a00; }
+      .amber-soft { fill: #fff2d9; }
+      .teal { fill: #087f7a; }
+      .teal-soft { fill: #dff2ee; }
+      .blue { fill: #296d98; }
+      .blue-soft { fill: #e3f0f8; }
+      .redis { fill: #dc382d; }
+      .h1 { font: 850 36px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .h2 { font: 850 22px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .h3 { font: 800 16px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .body { font: 500 14px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .body-bold { font: 800 14px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .small { font: 800 11px Inter, Arial, sans-serif; letter-spacing: 0; text-transform: uppercase; }
+      .tiny { font: 700 10px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .metric { font: 900 44px Inter, Arial, sans-serif; letter-spacing: 0; }
+      .mono { font: 650 12px ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1440" height="940"/>
+
+  <!-- Header -->
+  <rect class="header" x="28" y="24" width="1384" height="104" rx="0"/>
+  <text class="small" x="58" y="58" fill="#87d9cf">Agent-as-Judge</text>
+  <text class="h1" x="58" y="100" fill="#ffffff">Trust Boundary Inspector</text>
+  <text class="body" x="456" y="64" fill="#bbcbcd">Bring any multi-agent flow. Judge the handoffs where one agent's claim can hurt the next step.</text>
+  <rect x="1130" y="48" width="118" height="56" rx="4" fill="#1d383b" stroke="#34585b"/>
+  <text class="small" x="1150" y="71" fill="#b9ccce">Mode</text>
+  <text class="h3" x="1150" y="93" fill="#ffffff">Replay demo</text>
+  <rect x="1266" y="48" width="114" height="56" rx="4" fill="#1d383b" stroke="#34585b"/>
+  <circle class="redis" cx="1286" cy="76" r="8"/>
+  <text class="small" x="1302" y="73" fill="#b9ccce">Redis</text>
+  <text class="h3" x="1302" y="94" fill="#ffffff">Streaming</text>
+
+  <!-- Flow setup strip -->
+  <rect class="panel" x="28" y="150" width="1384" height="118" rx="6"/>
+  <text class="small" x="58" y="184" fill="#087f7a">Flow under audit</text>
+  <text class="h2 ink" x="58" y="214">Input or import the agent flow</text>
+  <text class="body muted" x="58" y="240">Paste LangGraph JSON, Mermaid, MCP config, trace ID, or describe nodes and handoffs.</text>
+
+  <rect class="soft2" x="438" y="174" width="426" height="54" rx="5" stroke="#cfdcdd"/>
+  <text class="mono muted" x="460" y="207">planner -> judge_gate -> booker</text>
+  <rect class="teal" x="884" y="174" width="124" height="54" rx="5"/>
+  <text class="h3" x="920" y="207" fill="#ffffff">Audit</text>
+  <rect class="soft" x="1028" y="174" width="166" height="54" rx="5" stroke="#cfdcdd"/>
+  <text class="body-bold ink" x="1050" y="197">Evidence source</text>
+  <text class="body muted" x="1050" y="219">LangGraph state</text>
+  <rect class="soft" x="1212" y="174" width="162" height="54" rx="5" stroke="#cfdcdd"/>
+  <text class="body-bold ink" x="1234" y="197">Audit points</text>
+  <text class="body muted" x="1234" y="219">1 trust edge</text>
+
+  <!-- Main selected boundary -->
+  <rect class="panel" x="28" y="292" width="536" height="370" rx="6"/>
+  <text class="small" x="58" y="326" fill="#087f7a">Selected trust boundary</text>
+  <text class="h2 ink" x="58" y="354">planner -> booker</text>
+  <text class="body muted" x="58" y="380">This is where an agent claim becomes downstream action.</text>
+
+  <rect class="flat" x="72" y="440" width="132" height="72" rx="6"/>
+  <text class="h3 ink" x="104" y="469">Planner</text>
+  <text class="body muted" x="98" y="492">claims done</text>
+  <circle class="amber-soft" cx="284" cy="476" r="54" stroke="#b66a00" stroke-width="2"/>
+  <text class="small" x="246" y="466" fill="#b66a00">Judge gate</text>
+  <text class="h3 ink" x="254" y="491">verifies</text>
+  <rect class="flat" x="384" y="440" width="132" height="72" rx="6"/>
+  <text class="h3 ink" x="421" y="469">Booker</text>
+  <text class="body muted" x="415" y="492">blocked</text>
+  <path class="line-red" d="M204 476 C224 476 238 476 250 476"/>
+  <path class="line" d="M338 476 C358 476 370 476 384 476"/>
+  <text class="small" x="214" y="452" fill="#b42343">audit failed</text>
+  <text class="small" x="394" y="420" fill="#66787b">not reached</text>
+
+  <rect class="red-soft" x="58" y="562" width="456" height="70" rx="6" stroke="#efbec8"/>
+  <text class="small" x="82" y="588" fill="#b42343">Provocation</text>
+  <text class="h3 ink" x="82" y="615">The next agent would have acted on an unverified claim.</text>
+
+  <!-- Verdict center -->
+  <rect class="panel" x="588" y="292" width="392" height="370" rx="6"/>
+  <text class="small" x="618" y="326" fill="#b42343">Can this handoff continue?</text>
+  <text class="metric red" x="618" y="388">NO</text>
+  <text class="h2 ink" x="618" y="426">Booker is blocked</text>
+  <text class="body muted" x="618" y="452">Judge found critical requirements that are either missing or not proven by evidence.</text>
+
+  <rect class="soft" x="618" y="486" width="156" height="62" rx="5"/>
+  <text class="small muted" x="638" y="511">Confidence</text>
+  <text class="h2 ink" x="638" y="536">0.86</text>
+  <rect class="soft" x="794" y="486" width="156" height="62" rx="5"/>
+  <text class="small muted" x="814" y="511">Route</text>
+  <text class="h2 ink" x="814" y="536">Retry</text>
+
+  <rect class="red-soft" x="618" y="570" width="332" height="42" rx="5"/>
+  <text class="body-bold red" x="638" y="596">Silent failure prevented</text>
+  <rect class="amber-soft" x="618" y="620" width="332" height="42" rx="5"/>
+  <text class="body-bold amber" x="638" y="646">Budget cap is asserted, not calculated</text>
+
+  <!-- Right repair -->
+  <rect class="panel" x="1004" y="292" width="408" height="370" rx="6"/>
+  <text class="small" x="1034" y="326" fill="#296d98">CopilotKit repair actions</text>
+  <text class="h2 ink" x="1034" y="354">Fix the loop</text>
+  <text class="body muted" x="1034" y="380">The assistant sees the audit state and can trigger frontend tools.</text>
+
+  <rect class="blue-soft" x="1034" y="414" width="348" height="68" rx="6" stroke="#c7e1ef"/>
+  <text class="h3 ink" x="1058" y="441">Patch planner prompt</text>
+  <text class="body muted" x="1058" y="464">Require itemized flights, total budget, and dietary proof.</text>
+  <rect class="soft" x="1034" y="496" width="348" height="68" rx="6" stroke="#d5e0e1"/>
+  <text class="h3 ink" x="1058" y="523">Request missing evidence</text>
+  <text class="body muted" x="1058" y="546">Ask planner to produce the exact proof Judge needs.</text>
+  <rect class="green-soft" x="1034" y="580" width="166" height="42" rx="5" stroke="#cbe8d5"/>
+  <text class="h3 green" x="1070" y="607">Retry node</text>
+  <rect class="red-soft" x="1216" y="580" width="166" height="42" rx="5" stroke="#efbec8"/>
+  <text class="h3 red" x="1250" y="607">Keep blocked</text>
+
+  <!-- Bottom insight cards -->
+  <rect class="panel" x="28" y="686" width="884" height="244" rx="6"/>
+  <text class="small" x="58" y="720" fill="#087f7a">Three things that matter</text>
+
+  <rect class="red-soft" x="58" y="746" width="264" height="154" rx="6" stroke="#efbec8"/>
+  <text class="small" x="82" y="776" fill="#b42343">Claim not proven</text>
+  <text class="h2 ink" x="82" y="812">3 gaps</text>
+  <text class="body muted" x="82" y="842">Flights, budget total, and dietary constraints are missing or unsupported.</text>
+
+  <rect class="amber-soft" x="352" y="746" width="264" height="154" rx="6" stroke="#f0d092"/>
+  <text class="small" x="376" y="776" fill="#b66a00">Downstream risk</text>
+  <text class="h2 ink" x="376" y="812">Bad booking</text>
+  <text class="body muted" x="376" y="842">Booker could purchase against an itinerary that violates the original goal.</text>
+
+  <rect class="green-soft" x="646" y="746" width="264" height="154" rx="6" stroke="#cbe8d5"/>
+  <text class="small" x="670" y="776" fill="#1f7a4d">Fix is promptable</text>
+  <text class="h2 ink" x="670" y="812">Checklist</text>
+  <text class="body muted" x="670" y="842">Add an evidence contract to the planner prompt, then rerun only that node.</text>
+
+  <!-- Redis stream -->
+  <rect class="panel" x="936" y="686" width="476" height="244" rx="6"/>
+  <text class="small" x="966" y="720" fill="#dc382d">Redis-powered live audit stream</text>
+  <text class="body muted" x="966" y="746">Each judge stage is appended to a Redis Stream for replayable audit history.</text>
+
+  <g>
+    <circle class="green" cx="982" cy="782" r="6"/>
+    <text class="mono ink" x="1000" y="786">audit.started</text>
+    <text class="body muted" x="1138" y="786">planner->booker</text>
+  </g>
+  <g>
+    <circle class="green" cx="982" cy="818" r="6"/>
+    <text class="mono ink" x="1000" y="822">rubric.derived</text>
+    <text class="body muted" x="1138" y="822">4 criteria</text>
+  </g>
+  <g>
+    <circle class="red" cx="982" cy="854" r="6"/>
+    <text class="mono ink" x="1000" y="858">criterion.failed</text>
+    <text class="body muted" x="1138" y="858">budget_total</text>
+  </g>
+  <g>
+    <circle class="red" cx="982" cy="890" r="6"/>
+    <text class="mono ink" x="1000" y="894">handoff.blocked</text>
+    <text class="body muted" x="1138" y="894">retry planner</text>
+  </g>
+
+  <rect class="soft" x="1296" y="772" width="86" height="44" rx="5" stroke="#d5e0e1"/>
+  <text class="small muted" x="1314" y="790">Stream</text>
+  <text class="tiny ink" x="1314" y="808">audit:42</text>
+  <rect class="soft" x="1296" y="836" width="86" height="44" rx="5" stroke="#d5e0e1"/>
+  <text class="small muted" x="1314" y="854">Replay</text>
+  <text class="tiny ink" x="1314" y="872">XRANGE</text>
+</svg>
