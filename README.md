@@ -73,6 +73,24 @@ OPENAI_API_KEY=sk-...
 # optional: JUDGE_MODEL, ANTHROPIC_API_KEY, JUDGE_CONSENSUS_RUNS
 ```
 
+## CopilotKit UI
+
+This repo also includes a Next.js LLM Judge workbench in [`app/`](app). It gives
+you an editable judge surface for prompts, reference answers, rubrics, candidate
+responses, score breakdowns, and a CopilotKit sidebar that can inspect the judge
+state and run frontend tools.
+
+```bash
+npm install
+cp .env.example .env.local   # then fill in OPENAI_API_KEY
+npm run dev
+```
+
+Open `http://localhost:3000`.
+
+The CopilotKit runtime is served from `/api/copilotkit` and uses
+`COPILOTKIT_MODEL` when set, defaulting to `openai/gpt-4.1-mini`.
+
 ---
 
 ## Run the MCP server
