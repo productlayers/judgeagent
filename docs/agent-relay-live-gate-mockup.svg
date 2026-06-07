@@ -1,5 +1,5 @@
 <svg width="1440" height="940" viewBox="0 0 1440 940" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">Proofline live gate UI mockup</title>
+  <title id="title">Agent Relay live gate UI mockup</title>
   <desc id="desc">A more distinctive mockup for an agent handoff audit UI, focused on claim versus proof, live Redis events, and a blocked downstream handoff.</desc>
   <defs>
     <filter id="shadow" x="-8%" y="-8%" width="116%" height="124%">
@@ -44,7 +44,7 @@
   <!-- Stage header -->
   <rect class="black" x="28" y="24" width="1384" height="112" rx="0"/>
   <text class="small" x="58" y="58" fill="#9fd8cf">Agent-as-Judge</text>
-  <text class="h1" x="58" y="102" fill="#ffffff">Proofline</text>
+  <text class="h1" x="58" y="102" fill="#ffffff">Agent Relay</text>
   <text class="body2" x="252" y="72" fill="#c8d3d5">A live trust gate for agent handoffs</text>
   <text class="body" x="252" y="99" fill="#94a7aa">The UI shows the exact moment an agent claim becomes blocked, repaired, or allowed downstream.</text>
 

@@ -1,6 +1,6 @@
 <svg width="1440" height="940" viewBox="0 0 1440 940" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">Proofline clickable agent detail mockup</title>
-  <desc id="desc">A polished Proofline UI mockup showing a clickable multi-agent flow where selecting Planner opens an agent detail panel with prompt, tools, last claim, evidence, and repair actions.</desc>
+  <title id="title">Agent Relay clickable agent detail mockup</title>
+  <desc id="desc">A polished Agent Relay UI mockup showing a clickable multi-agent flow where selecting Planner opens an agent detail panel with prompt, tools, last claim, evidence, and repair actions.</desc>
   <defs>
     <filter id="shadow" x="-8%" y="-8%" width="116%" height="124%">
       <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#102124" flood-opacity="0.14"/>
@@ -69,7 +69,7 @@
 
   <!-- Header -->
   <rect x="32" y="28" width="1376" height="102" rx="0" fill="url(#headerGrad)"/>
-  <text class="small" x="64" y="62" fill="#9fd8cf">Proofline</text>
+  <text class="small" x="64" y="62" fill="#9fd8cf">Agent Relay</text>
   <text class="h1" x="64" y="103" fill="#ffffff">Click any agent to see what it was told, what it claimed, and why the handoff paused.</text>
   <rect x="1264" y="52" width="110" height="56" rx="5" fill="#21383b" stroke="#3a5558"/>
   <circle class="redis blink" cx="1290" cy="80" r="8"/>
@@ -90,7 +90,7 @@
   <!-- Flow stage -->
   <rect class="panel" x="32" y="284" width="934" height="236" rx="8"/>
   <text class="small" x="64" y="320" fill="#087f7a">Flow being checked</text>
-  <text class="h2 ink" x="64" y="354">Trip request -> Planner -> Proofline check -> Booker</text>
+  <text class="h2 ink" x="64" y="354">Trip request -> Planner -> Agent Relay check -> Booker</text>
 
   <g transform="translate(70 398)">
     <rect class="flat" x="0" y="0" width="158" height="64" rx="7"/>
@@ -103,7 +103,7 @@
     <path class="line-active slide" d="M422 32 C454 32 476 32 508 32"/>
     <rect class="amber-soft" x="508" y="-8" width="202" height="80" rx="9" stroke="#e0bc68" stroke-width="2"/>
     <text class="small" x="536" y="23" fill="#a96400">Checking now</text>
-    <text class="h3 ink" x="536" y="52">Proofline checks</text>
+    <text class="h3 ink" x="536" y="52">Agent Relay checks</text>
     <path class="line-paused slide" d="M710 32 C742 32 762 32 792 32"/>
     <rect class="red-soft" x="792" y="0" width="158" height="64" rx="7" stroke="#efbec8"/>
     <text class="small" x="814" y="26" fill="#b42343">Paused</text>
@@ -114,7 +114,7 @@
   <rect class="panel" x="32" y="548" width="292" height="336" rx="8"/>
   <text class="small" x="64" y="584" fill="#296d98">What Planner claimed</text>
   <text class="h2 ink" x="64" y="620">"The trip is ready."</text>
-  <text class="body muted" x="64" y="652">Proofline checks the plan and artifacts before Booker can use them.</text>
+  <text class="body muted" x="64" y="652">Agent Relay checks the plan and artifacts before Booker can use them.</text>
   <rect class="blue-soft" x="64" y="714" width="228" height="82" rx="7" stroke="#c7e1ef"/>
   <text class="small" x="88" y="744" fill="#296d98">Last output</text>
   <text class="body ink" x="88" y="772">Itinerary present, proof package incomplete.</text>
