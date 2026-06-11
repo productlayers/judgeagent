@@ -1,32 +1,24 @@
 # Agent-as-Judge
 
-**A Judge MCP server that verifies agent handoffs in multi-agent workflows.**
+**A verification agent for multi-agent pipelines.**
 
-Multi-agent pipelines fail silently when one agent *claims* a task is done and
-the next agent trusts that claim without checking. Agent-as-Judge sits at those
-handoff points: any agent can call the judge with the original goal, its
-completion claim, and the evidence it produced. The judge derives a rubric from
-the goal, checks whether the claim is actually *proven* by the evidence, and
-returns a structured `pass` / `fail` / `uncertain` verdict your orchestrator can
-act on automatically.
+Multi-agent pipelines fail silently when one agent claims a task is done and the next trusts that claim without checking. Agent-as-Judge sits at those handoff points: pass it the original goal, the agent's claim, and its evidence — it derives a rubric from the goal, checks whether the claim is proven by the evidence, and returns a structured `pass` / `fail` / `uncertain` verdict the orchestrator can act on.
 
-Every judge execution is traced end-to-end in [W&B Weave](https://wandb.ai/site/weave).
+Every execution is traced end-to-end in [W&B Weave](https://wandb.ai/site/weave).
+
+**[Demo video](https://www.youtube.com/watch?v=rNQsqGtMVWM) · [Slides](https://docs.google.com/presentation/d/1PkxEazN4Akwa_UQ3lMdfg80WSMjGhYNk/edit?slide=id.p1#slide=id.p1)**
 
 ---
 
-## Why agent-handoff verification matters
+## Why handoff verification
 
-In a pipeline like `Planner -> Booker -> Notifier`, the Booker assumes the
-Planner's "Done!" is true. If the plan is missing flights or busts the budget,
-the failure propagates silently and is expensive to debug later. A judge at the
-handoff:
+In a pipeline like `Planner -> Booker -> Notifier`, the Booker assumes the Planner's "Done!" is true. If the plan is missing flights or busts the budget, the failure propagates silently and is expensive to debug. A judge at the handoff:
 
 - **Blocks bad handoffs** (`fail`) before they corrupt downstream steps.
 - **Requests more evidence** (`uncertain`) when a claim can't be verified.
-- **Allows good handoffs** (`pass`) to proceed automatically.
+- **Allows good handoffs** (`pass`) to proceed.
 
-The judge does **not** summarize the agent's work. It decides whether the
-completion claim is supported by the evidence.
+The judge doesn't summarize the agent's work — it decides whether the completion claim is supported by the evidence.
 
 ---
 
@@ -40,17 +32,13 @@ run_judge
        └─ aggregate_verdict  code: criteria -> pass / fail / uncertain + can_continue
 ```
 
-- The **rubric is generated automatically** from the original goal, so you don't
-  maintain a separate eval config per task.
-- The **final decision is deterministic code**, so orchestrators get stable
-  stop/continue behavior even though an LLM does the per-criterion judging.
-- An optional **consensus mode** runs the judge N times and majority-votes.
+The rubric is generated from the goal — no manual eval config per task. The final verdict is deterministic code, so the stop/continue signal is stable even though an LLM does the per-criterion judging. Consensus mode runs the judge N times and majority-votes.
 
 ### Verdict semantics
 
 | verdict | `can_continue` | meaning |
 |---|---|---|
-| `pass` | `true` | The next workflow step may proceed. |
+| `pass` | `true` | Proceed to the next step. |
 | `fail` | `false` | Block the handoff; a requirement is demonstrably unmet. |
 | `uncertain` | `false` | Request more evidence, then re-check. |
 
@@ -75,10 +63,7 @@ OPENAI_API_KEY=sk-...
 
 ## CopilotKit UI
 
-This repo also includes a Next.js LLM Judge workbench in [`app/`](app). It gives
-you an editable judge surface for prompts, reference answers, rubrics, candidate
-responses, score breakdowns, and a CopilotKit sidebar that can inspect the judge
-state and run frontend tools.
+A Next.js judge workbench lives in [`app/`](app) — editable prompts, rubrics, candidate responses, score breakdowns, and a CopilotKit sidebar that can inspect judge state and run frontend tools.
 
 ```bash
 npm install
@@ -86,10 +71,7 @@ cp .env.example .env.local   # then fill in OPENAI_API_KEY
 npm run dev
 ```
 
-Open `http://localhost:3000`.
-
-The CopilotKit runtime is served from `/api/copilotkit` and uses
-`COPILOTKIT_MODEL` when set, defaulting to `openai/gpt-4.1-mini`.
+Open `http://localhost:3000`. The CopilotKit runtime is served from `/api/copilotkit` and uses `COPILOTKIT_MODEL` when set, defaulting to `openai/gpt-4.1-mini`.
 
 ---
 
@@ -101,8 +83,7 @@ judge-mcp                     # console script
 python -m agent_judge.server
 ```
 
-The server speaks MCP over **stdio**, so it works with Claude Desktop, Cursor,
-or any MCP client. Inspect it interactively:
+The server speaks MCP over **stdio** — works with Claude Desktop, Cursor, or any MCP client. Inspect it interactively:
 
 ```bash
 npx -y @modelcontextprotocol/inspector judge-mcp
@@ -130,17 +111,15 @@ npx -y @modelcontextprotocol/inspector judge-mcp
 
 ## Call `judge_handoff`
 
-The tool accepts:
-
 | field | required | description |
 |---|---|---|
 | `original_goal` | yes | The task the agent was given (source of truth). |
 | `agent_claim` | yes | The agent's completion claim. |
 | `agent_system_prompt` | no | The prompt/role the agent ran under. |
-| `evidence` | no | The agent's actual output/artifacts (the claim is checked against this). |
+| `evidence` | no | The agent's actual output/artifacts. |
 | `workflow_context` | no | Context about the surrounding workflow. |
 
-It returns structured JSON:
+Returns structured JSON:
 
 ```json
 {
@@ -159,8 +138,7 @@ It returns structured JSON:
 
 ### From the CLI
 
-The CLI exits with a verdict-based status code (`0` pass, `1` fail, `2`
-uncertain, `3` error), so it drops straight into shell pipelines and CI:
+The CLI exits with a verdict-based status code (`0` pass, `1` fail, `2` uncertain, `3` error):
 
 ```bash
 judge-cli --input examples/data/travel_incomplete.json
@@ -205,60 +183,44 @@ else:
 
 ---
 
-## LangGraph orchestration demo
+## LangGraph demo
 
-The proposed multi-agent pattern: **Planner → Judge gate → Booker**.
+**Planner → Judge gate → Booker**
 
 ```bash
 pip install -e ".[langgraph]"
 python examples/langgraph_travel_demo.py
 ```
 
-Each graph node is a Weave op. The judge gate calls `audit_handoff()` with
-historical evidence from graph state (no agent re-run). On `fail`, the
-orchestrator retries with corrected output; on `pass`, the booker node runs.
-
-MCP clients can also call the `audit_handoff` tool (includes `graph_id`,
-`thread_id`, `from_node`, `to_node` for LangGraph integration).
-
-Team architecture doc: [`docs/Agent-as-Judge-Current-vs-Proposed.docx`](docs/Agent-as-Judge-Current-vs-Proposed.docx)
+Each graph node is a Weave op. The judge gate calls `audit_handoff()` with evidence from graph state — no agent re-run. On `fail`, the orchestrator retries; on `pass`, the booker runs.
 
 ---
 
 ## Travel demo
 
-The primary demo runs the full loop end to end:
-
 ```bash
 python examples/travel_demo.py
 ```
 
-1. **Goal** — Plan a 5-day Tokyo trip for a family of four under $6,000
-   (flights, lodging, daily activities, dietary constraints, total breakdown).
-2. **Incomplete output** — an itinerary with activities and lodging but **no
-   flights, no total budget, and ignored dietary needs** -> judge returns
-   **`fail`** and lists the missing requirements.
-3. **Corrected output** — adds flight costs, dietary-aware meals, and a summed
-   budget of $5,720 -> judge returns **`pass`** and the workflow may proceed.
+1. **Goal** — 5-day Tokyo trip, family of four, under $6,000 (flights, lodging, activities, dietary constraints, total breakdown).
+2. **Incomplete output** — itinerary with activities and lodging, no flights, no budget, ignored dietary needs → judge returns `fail` with the missing requirements.
+3. **Corrected output** — adds flights, dietary-aware meals, total of $5,720 → judge returns `pass`.
 
 Data lives in [`examples/data/`](examples/data).
 
 ---
 
-## Eval examples
+## Eval guards
 
 ```bash
 python examples/run_evals.py
 ```
 
-Three guard cases keep the judge honest:
+Three cases keep the judge honest:
 
-- **false positive** ([`eval_false_positive.json`](examples/data/eval_false_positive.json)) —
-  task is incomplete; judge must **not** say `pass`.
-- **false negative** ([`eval_false_negative.json`](examples/data/eval_false_negative.json)) —
-  task is genuinely complete; judge must **not** wrongly reject it.
-- **uncertain** ([`eval_uncertain.json`](examples/data/eval_uncertain.json)) —
-  evidence is too thin to verify; judge must return `uncertain`.
+- **false positive** — task incomplete; judge must not say `pass`.
+- **false negative** — task complete; judge must not wrongly reject.
+- **uncertain** — evidence too thin; judge must return `uncertain`.
 
 The harness exits non-zero if any case doesn't match its expected verdict.
 
@@ -266,43 +228,19 @@ The harness exits non-zero if any case doesn't match its expected verdict.
 
 ## W&B Weave tracing
 
-Tracing is a first-class feature, not an afterthought. Each judge stage is a
-Weave op (`@weave.op`), so a single `judge_handoff` call produces a full trace
-tree:
+Each judge stage is a Weave op, so a single `judge_handoff` call produces a full trace tree:
 
 ```
 run_judge
 └─ run_judge_once
-   ├─ derive_rubric        (inputs + the derived rubric)
-   ├─ evaluate_rubric      (each per-criterion evaluation; nested LLM calls)
+   ├─ derive_rubric        (inputs + derived rubric)
+   ├─ evaluate_rubric      (per-criterion evaluations + nested LLM calls)
    └─ aggregate_verdict    (final verdict, confidence, prompt improvements)
 ```
 
-Because the OpenAI/Anthropic SDK calls are auto-instrumented by Weave, the raw
-LLM requests/responses appear nested under the right op automatically.
+OpenAI/Anthropic SDK calls are auto-instrumented — raw LLM requests appear nested under the right op automatically.
 
-Enable it by setting `WEAVE_PROJECT` (and being logged into wandb):
-
-```bash
-WEAVE_PROJECT=agent-judge
-WANDB_API_KEY=...
-```
-
-If `WEAVE_PROJECT` is unset, tracing degrades to a no-op and the judge still
-runs locally — so first-run is frictionless.
-
-Quickstart (3 lines):
-
-```python
-import weave
-weave.init("agent-judge")  # tracks LLM calls + @weave.op functions
-```
-
-LangGraph demo nodes (`planner_node`, `judge_gate_node`, `booker_node`) and
-`audit_handoff` are also Weave ops, so a full orchestration run appears as one
-trace tree in W&B.
-
-Run tests (includes Weave init graceful-fallback checks):
+Enable by setting `WEAVE_PROJECT` in `.env`. Without it, tracing is a no-op and the judge still runs locally.
 
 ```bash
 pip install -e ".[dev]"
@@ -317,7 +255,7 @@ pytest
 src/agent_judge/
   schemas.py          Pydantic input/output models (the contract)
   handoff_schemas.py  LangGraph + evidence bundle + audit response models
-  audit.py            audit_handoff() service (Weave op, routing hints, stats)
+  audit.py            audit_handoff() — routing hints, stats, Weave op
   llm.py              provider-agnostic JSON LLM client (OpenAI / Anthropic)
   prompts.py          rubric-derivation + evaluation prompts
   judge.py            derive_rubric / evaluate_rubric / aggregate_verdict / run_judge
@@ -330,9 +268,8 @@ examples/
   run_evals.py                false-positive / false-negative / uncertain guards
   data/                       goal + agent outputs + eval cases
 tests/                        aggregate, handoff audit, weave tracing
-docs/                         team architecture doc (Word)
-scripts/                      doc generator
-app/                          CopilotKit LLM Judge workbench (Next.js)
+app/                          CopilotKit judge workbench (Next.js)
+docs/                         architecture doc
 ```
 
 ## License
