@@ -32,6 +32,11 @@ def _load(name: str) -> JudgeInput:
     return JudgeInput.model_validate(raw)
 
 
+def _load_goal(name: str) -> str:
+    raw = json.loads((DATA / name).read_text(encoding="utf-8"))
+    return str(raw.get("original_goal", "")).strip()
+
+
 def _show(title: str, result: JudgeResult) -> None:
     bar = "=" * 70
     print(f"\n{bar}\n{title}\n{bar}")
@@ -63,8 +68,8 @@ def main() -> None:
     else:
         print("Weave tracing: disabled (set WEAVE_PROJECT + WANDB_API_KEY to enable)")
 
-    goal = _load("travel_goal.json")
-    print(f"\nGOAL:\n{goal.original_goal}")
+    goal = _load_goal("travel_goal.json")
+    print(f"\nGOAL:\n{goal}")
 
     # --- Step 1: incomplete output -> expect FAIL ---
     incomplete = _load("travel_incomplete.json")
